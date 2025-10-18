@@ -1,0 +1,45 @@
+# CITATION.cff — Metadados de Citação Científica
+# Este arquivo permite que o repositório seja citado formalmente em publicações acadêmicas.
+
+cff-version: 1.2.0
+title: "Avaliação de LLMs na Documentação Automatizada de Código Java"
+message: "Se você utilizar este repositório em sua pesquisa, por favor cite-o conforme os metadados abaixo."
+type: software
+authors:
+  - family-names: "Carvalho"
+    given-names: "Murillo"
+    email: "murillo.ed1402@gmail.com"
+    affiliation: "Programa de Pós-Graduação em Computação Aplicada – Universidade Federal XYZ"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.placeholder"
+repository-code: "https://github.com/usuario/murillo-llm-code-docs"
+version: "1.0"
+license: "MIT"
+abstract: >
+  Este repositório contém os scripts, prompts e artefatos experimentais usados para avaliar a
+  capacidade de modelos de linguagem (Amazon Q Developer e ChatGPT) em gerar documentação técnica
+  automatizada (Javadoc) para sistemas Java legados. O estudo aplica um pipeline iterativo baseado
+  em métricas de completude, utilidade e veracidade (CHT Framework).
+keywords:
+  - LLM
+  - Amazon Q Developer
+  - ChatGPT
+  - Engenharia de Software
+  - Documentação Automatizada
+  - CHT Framework
+  - Reprodutibilidade Científica
+  - Java
+date-released: "2025-10-18"
+contact:
+  - name: "Murillo Carvalho"
+    email: "murillo.ed1402@gmail.com"
+preferred-citation:
+  type: article
+  title: "Avaliação de LLMs na Documentação Técnica Automatizada de Sistemas Java Legados"
+  authors:
+    - family-names: "Carvalho"
+      given-names: "Murillo"
+  journal: "Projeto de Qualificação – PPG Computação Aplicada, Universidade Federal XYZ"
+  year: 2025
+  doi: "10.5281/zenodo.placeholder"
