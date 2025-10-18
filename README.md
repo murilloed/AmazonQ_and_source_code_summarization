@@ -1,46 +1,109 @@
-# 🧠 Avaliação de Documentação Gerada por IA – Grupo Focal SASB
+# 📘 SARSB Documentation Intelligence — Amazon Q Evaluation Framework
 
-## 📘 Visão Geral
-Este repositório contém o material, scripts e instrumentos utilizados no **grupo focal de avaliação da documentação gerada automaticamente** pelo **Amazon Q (AWS)** e revisada com suporte do **ChatGPT**.  
-O estudo faz parte da POC conduzida no **Sistema SASB** e tem como objetivo **avaliar a qualidade, completude, utilidade e veracidade** da documentação técnica produzida por modelos de IA.
-
----
-
-## 🎯 Objetivo do Experimento
-Avaliar, de forma sistemática e reprodutível, a qualidade da documentação de métodos Java gerada por IA, utilizando três dimensões principais:
-
-- **C (Completeness)** – Cobertura e detalhamento dos parâmetros, retornos e exceções.  
-- **H (Helpfulness)** – Clareza, legibilidade e utilidade prática para desenvolvedores.  
-- **T (Truthfulness)** – Coerência e fidelidade entre o conteúdo do Javadoc e o código real.
-
-Além da coleta quantitativa via survey, o grupo focal permite **capturar percepções qualitativas** sobre o uso do Amazon Q e do ChatGPT no contexto de documentação automatizada.
+### Agência Nacional de Águas e Saneamento Básico (ANA)
+**Projeto Experimental de Avaliação de Modelos de Linguagem (LLMs) aplicados à Documentação Automatizada em Sistemas Legados**
 
 ---
 
-## 🧩 Metodologia Resumida
+## 🧩 Visão Geral
 
-### 1. Seleção de Métodos
-- Universo: ~200 métodos Java do backend SASB.  
-- Seleção: **30 métodos principais + 4 reservas**, com base em amostragem **estratificada por camada e complexidade**.  
-- Critérios: camada (service, model, util etc.), presença de exceções, nível de documentação e LOC/ciclomática.
+Este repositório contém os materiais, scripts e resultados associados ao estudo **“Avaliação do Amazon Q (AWS) para geração automatizada de documentação técnica no sistema SARSB”**, conduzido como parte da pesquisa de pós-graduação em Engenharia de Software aplicada à transformação digital do setor público.
 
-### 2. Distribuição entre Avaliadores
-- 15 desenvolvedores participantes.  
-- Cada dev avalia **10 métodos**, totalizando **150 avaliações** (30 × 5).  
-- Algoritmo de alocação balanceado e reprodutível (seed controlada).
-
-### 3. Instrumento de Coleta
-- **Survey quantitativo** baseado em escala Likert (1–5) para C/H/T.  
-- **Questões abertas** para observações qualitativas e percepção geral.  
-- **Sessão de grupo focal** com roteiro temático sobre percepção, utilidade, impacto e ética.
-
-### 4. Análise de Dados
-- Estatísticas descritivas (médias, desvios, boxplots).  
-- Confiabilidade interavaliadores (Fleiss’ Kappa, ICC).  
-- Correlação entre complexidade e ganho de completude.  
-- Codificação qualitativa de insights e percepções.
+O estudo avalia a **eficácia, utilidade e veracidade** de documentações geradas automaticamente por modelos de linguagem de grande escala (LLMs) — com foco no **Amazon Q**, utilizando o sistema **SARSB (Sistema Nacional de Saneamento Básico)** como estudo de caso empírico.
 
 ---
 
-## 🧮 Estrutura do Repositório
+## 🧠 Objetivo
+
+Avaliar a viabilidade do uso de **modelos de linguagem generativos (LLMs)** para apoiar a **documentação técnica automatizada de sistemas legados**, garantindo:
+- **Completude estrutural (Completeness)**: aderência ao padrão Javadoc;
+- **Utilidade prática (Helpfulness)**: clareza e relevância percebidas;
+- **Veracidade factual (Truthfulness)**: consistência entre documentação e código real.
+
+---
+
+## ⚙️ Estrutura Metodológica
+
+O experimento integra duas abordagens clássicas da Engenharia de Software Empírica:
+
+### **1. Goal–Question–Metric (GQM)**
+Estrutura de rastreabilidade que conecta objetivos, perguntas de pesquisa e métricas mensuráveis:
+- **Goal:** avaliar a eficácia do Amazon Q na documentação automatizada.  
+- **Questions:** o conteúdo gerado é completo, útil e verdadeiro?  
+- **Metrics:** derivadas das dimensões CHT — *Completeness*, *Helpfulness* e *Truthfulness*.
+
+### **2. Evaluation Framework (CHT)**
+Tripé de avaliação proposto para mensurar qualidade documental:
+- **Completeness:** verificação automática via AST + Regex.  
+- **Helpfulness:** avaliação com *LLM-as-a-Judge* (ChatGPT).  
+- **Truthfulness:** checagem contra grafo de dependências do código.
+
+---
+
+## 🧮 Dataset
+
+- **Sistema Avaliado:** SARSB (Sistema de Acompanhamento de Referência do Saneamento Básico)  
+- **Linguagem:** Java  
+- **Arquivos:** 563  
+- **Linhas de Código:** ~35.000  
+- **Métodos Totais:** 510  
+- **Amostra Experimental:** 219 métodos (amostragem estratificada proporcional)  
+- **Camadas Analisadas:** Config, Exception, Model, Report, Repository, Resource, Service, Util  
+
+---
+
+## 🧾 Indicadores de Avaliação
+
+| Indicador | Descrição | Método de Cálculo |
+|------------|------------|------------------|
+| **C-score** | Completude estrutural | % de seções Javadoc presentes |
+| **H-score** | Utilidade percebida | Média Likert (1–5) por LLM-as-a-Judge |
+| **T-score** | Veracidade factual | Razão de entidades verificadas |
+| **QDI** | Índice de ganho de completude | (Documentação gerada / Documentação original) |
+
+---
+
+## 🧰 Pipeline Experimental
+
+1. **Extração dos métodos** do repositório Java (via scripts PowerShell e Python).  
+2. **Geração automática de documentação** com **Amazon Q (AWS)** — modo *zero-shot* e *few-shot prompting*.  
+3. **Análise CHT**:
+   - *Completeness* → AST + Regex  
+   - *Helpfulness* → LLM-as-a-Judge  
+   - *Truthfulness* → Dependency Graph Checking  
+4. **Cálculo de métricas (C, H, T, QDI)**.  
+5. **Tratamento estatístico**: correlações, médias e análises inferenciais.  
+6. **Reprodutibilidade**: todos os outputs armazenados e versionados em planilhas estruturadas.
+
+---
+
+## 📊 Principais Resultados (Resumo)
+
+- **Completude média:** 71%  
+- **Helpfulness média:** 4,0 / 5  
+- **Truthfulness (Existence Ratio):** 0,89  
+- **Comparativo:** desempenho similar ao DocAgent (Meta AI, 2025)
+
+Esses resultados demonstram que o **Amazon Q** é viável como ferramenta de apoio à documentação automatizada, especialmente em sistemas públicos legados de grande escala.
+
+---
+
+## 🧭 Conclusão
+
+O framework proposto integra **rastreabilidade científica (GQM)**, **avaliação automatizada (CHT)** e **validação híbrida (IA + revisão humana)**.  
+O estudo estabelece um **padrão metodológico reprodutível** para pesquisas sobre documentação técnica gerada por LLMs, contribuindo para a adoção segura e auditável de inteligência artificial na **engenharia de software pública**.
+
+---
+
+## 📚 Referências Principais
+
+- Basili, V.R., Caldiera, G., & Rombach, H.D. (1994). *Goal Question Metric Approach*.  
+- Yang, D. et al. (2025). *DocAgent: A Multi-Agent System for Automated Code Documentation Generation*. Meta AI.  
+- Gu, J. et al. (2024). *Survey on LLMs for Software Engineering*. IEEE Software.  
+- Esquivel, A. et al. (2023). *Detecção Automatizada de Estruturas de Código via AST*.  
+- Treccani, M. et al. (2010). *Utilização de Métodos Empíricos em Engenharia de Software*.
+
+---
+
+## 🧩 Estrutura do Repositório
 
