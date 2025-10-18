@@ -1,1 +1,151 @@
+# 🧠 Avaliação de LLMs na Documentação Automatizada de Código Java
+### Repositório Experimental – Murillo (2025)
 
+Este repositório contém os artefatos e scripts necessários para **replicar o processo de geração, análise e aprimoramento de documentação técnica automatizada** utilizando **Amazon Q Developer** e **ChatGPT (LLM-as-a-Judge)**.  
+Os experimentos seguem o modelo metodológico descrito no projeto de qualificação *Murillo2_qualifica (2025)*.
+
+---
+
+## 🧩 Sumário
+- [Objetivo da Pesquisa](#objetivo-da-pesquisa)
+- [Arquitetura Experimental](#arquitetura-experimental)
+- [Estrutura do Repositório](#estrutura-do-repositório)
+- [Pipeline de Execução](#pipeline-de-execução)
+- [Reprodutibilidade](#reprodutibilidade)
+- [Resultados](#resultados)
+- [Citação e Licença](#citação-e-licença)
+
+---
+
+## 🎯 Objetivo da Pesquisa
+Investigar a **eficácia de modelos de linguagem (LLMs)** na geração automática de documentação técnica para sistemas Java legados.  
+O estudo busca quantificar ganhos de:
+- **Completude (C)** – presença de informações essenciais;
+- **Utilidade (H)** – clareza e relevância para desenvolvedores;
+- **Veracidade (T)** – aderência ao comportamento real do código.
+
+A metodologia combina **Amazon Q (geração)** e **ChatGPT (avaliação e refinamento)** em um ciclo iterativo baseado em métricas CHT (*Completeness–Helpfulness–Truthfulness*).
+
+---
+
+## ⚙️ Arquitetura Experimental
+
+```mermaid
+graph TD
+A[Código Original] --> B[Amazon Q - Few Shot Prompting]
+B --> C[Documentação Inicial (Javadoc)]
+C --> D[ChatGPT - LLM-as-a-Judge]
+D --> E[Métricas CHT e Feedback]
+E --> F[Amazon Q - Refinamento Iterativo]
+F --> G[Versão Final da Documentação]
+G --> H[Evaluation Framework - Métricas Agregadas]
+H --> I[Survey de Desenvolvedores]
+📁 Estrutura do Repositório
+css
+Copiar código
+murillo-llm-code-docs/
+│
+├── README.md                ← Documento principal
+├── LICENSE                  ← Licença MIT
+├── CITATION.cff             ← Metadados de citação (Zenodo)
+│
+├── data/
+│   ├── codigo_original/     ← Código-fonte Java sem documentação
+│   ├── codigo_amazonq/      ← Saída inicial do Amazon Q
+│   ├── codigo_final/        ← Versão refinada (Q + ChatGPT)
+│   ├── results/             ← Gráficos, métricas e tabelas (CHT)
+│   └── survey/              ← Dados simulados de validação humana
+│
+├── methodology/
+│   ├── 01_pipeline_overview.md
+│   ├── 02_prompt_amazonq_fewshot.md
+│   ├── 03_prompt_chatgpt_eval.md
+│   ├── 04_prompt_amazonq_refinement.md
+│   ├── 05_framework_cht.md
+│   └── 06_survey_procedure.md
+│
+├── scripts/
+│   ├── generate_ast.py
+│   ├── analyze_completeness_regex.py
+│   ├── compute_cht_metrics.py
+│   ├── plot_results.py
+│   └── llm_as_judge_chatgpt.ipynb
+│
+└── notebooks/
+    └── pipeline_demonstration.ipynb
+🚀 Pipeline de Execução
+1️⃣ Preparar ambiente
+Requer:
+
+Python 3.10+
+
+API OpenAI (GPT-4)
+
+Acesso ao Amazon Q Developer
+
+Dependências:
+
+bash
+Copiar código
+pip install openai matplotlib pandas python-docx
+2️⃣ Executar etapas principais
+bash
+Copiar código
+# 1. Geração inicial (Few-Shot)
+python scripts/generate_ast.py
+
+# 2. Avaliação ChatGPT (LLM-as-a-Judge)
+jupyter notebook notebooks/pipeline_demonstration.ipynb
+
+# 3. Cálculo das métricas CHT
+python scripts/compute_cht_metrics.py
+
+# 4. Plotagem dos resultados
+python scripts/plot_results.py
+📊 Resultados
+Dimensão	Antes da Revisão	Após Revisão	Variação
+Completeness	0.6	0.8	+33%
+Helpfulness	2.4	4.2	+75%
+Truthfulness	1.0	1.0	0%
+
+<p align="center"> <img src="data/results/CHT_Method1_comparison.png" width="550"> </p>
+Conclusão:
+O ciclo iterativo Amazon Q → ChatGPT → Amazon Q elevou em mais de 70% a clareza e utilidade das documentações, sem perda de precisão técnica.
+
+🧪 Reprodutibilidade
+Todos os prompts e scripts são disponibilizados integralmente na pasta methodology/.
+Cada arquivo possui cabeçalho com metadados de:
+
+Autor e afiliação acadêmica;
+
+Data e versão;
+
+Linguagem;
+
+Descrição do propósito científico.
+
+Para replicar o experimento com outro método Java, basta substituir o arquivo de entrada em data/codigo_original/ e executar o mesmo pipeline.
+
+📚 Referência científica
+Murillo, M. (2025). Avaliação de LLMs na Geração de Documentação Técnica Automatizada de Sistemas Java Legados.
+Projeto de Qualificação — Programa de Pós-Graduação em Computação Aplicada, Universidade Federal XYZ.
+
+🧩 Citação e Licença
+Cite este repositório como:
+
+bash
+Copiar código
+@software{murillo2025_llm_docs,
+  author = {Murillo, M.},
+  title  = {Avaliação de LLMs na Documentação Automatizada de Código Java},
+  year   = {2025},
+  url    = {https://github.com/usuario/murillo-llm-code-docs},
+  version = {1.0},
+  doi = {10.5281/zenodo.placeholder}
+}
+📄 Licença: MIT
+
+🤝 Contato
+Autor: Murillo Carvalho
+E-mail: murillo.ed1402@gmail.com
+LinkedIn: linkedin.com/in/murillo-carvalho
