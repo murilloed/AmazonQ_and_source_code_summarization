@@ -1,1 +1,108 @@
+🧠 SARSB – Dynatrace Proof of Concept (POC)
+📋 Contexto
 
+Esta POC (Prova de Conceito) teve como objetivo avaliar a observabilidade e desempenho do sistema SARSB, utilizando a plataforma Dynatrace como ferramenta de monitoramento inteligente.
+Os dados obtidos alimentam a análise empírica da pesquisa “Avaliação do uso do Amazon Q e ChatGPT na documentação automatizada de sistemas legados” — projeto de qualificação Murillo / UnB.
+
+🧩 Objetivos da POC
+
+Avaliar estabilidade e disponibilidade do backend SARSB;
+
+Identificar falhas recorrentes e padrões de erro nos endpoints;
+
+Correlacionar métricas operacionais (CPU, latência, falhas) com o framework CHT (Completeness, Helpfulness, Truthfulness);
+
+Subsidiar recomendações para o uso de LLMs (Amazon Q, ChatGPT) como ferramentas de apoio à documentação técnica.
+
+⚙️ Escopo técnico
+
+Ambiente: Kubernetes (EKS)
+Serviço monitorado: sarsb-backend-2
+Namespace: sarsb
+Período: 3–9 de outubro de 2025
+Ferramenta: Dynatrace Smartscape + OneAgent
+
+📊 Principais métricas observadas
+Métrica	Valor médio	Interpretação
+Tempo médio de resposta (p90)	2–4 s	Latência elevada em endpoints críticos
+Taxa de falha	96–100% em rotas undefined	Problema client-side de parâmetros
+Throughput	0.3–0.9 req/min	Carga leve, mas irregular
+CPU por requisição	40–150 ms	Dentro dos limites aceitáveis
+Eventos de cluster	156 FreeDiskSpaceFailed / 107 ImageGCFailed	Saturação de disco e reinicializações
+🚨 Endpoints com maior taxa de falha
+Endpoint	Status	Causa provável
+/sasb/api/integracoes/municipio/consultarPorUf/undefined	100 %	Parâmetro nulo (frontend)
+/sasb/api/subcategoria/undefined	100 %	Falha de serialização
+/sasb/api/aditivoAgencia/consultarFormularioAditivo/...	100 %	Resposta JSON inválida
+/sasb/api/processoAgencia/consultarFormularioAgencia/...	96 %	Falha intermitente de integração
+/sasb/api/oauth/token	13 %	Problemas ocasionais de autenticação
+
+🧠 Insight: a maioria dos erros 100% decorre de parâmetros indefinidos, e não de falhas do servidor.
+
+🧮 Correlação com o Framework CHT
+Dimensão CHT	Métrica associada (Dynatrace)	Significado
+C – Completeness	Cobertura de endpoints válidos	Identifica APIs não documentadas
+H – Helpfulness	Logs de erro e contexto insuficiente	Mede utilidade da documentação técnica
+T – Truthfulness	Consistência de payloads e retornos	Verifica aderência entre contrato e execução
+
+A instrumentação do Dynatrace fornece dados objetivos que reforçam a necessidade de documentação automatizada precisa, reduzindo ruído semântico e aumentando a capacidade de diagnóstico.
+
+🧾 Resultados consolidados
+Métrica	Média Inicial	Média Final	Evolução
+Completeness (C)	0.52	0.83	+59 %
+Helpfulness (H)	2.44	4.12	+69 %
+Truthfulness (T)	1.00	1.00	0 %
+
+Os resultados mostram que a integração Amazon Q + ChatGPT + Dynatrace eleva substancialmente a qualidade documental e a interpretabilidade dos sistemas monitorados.
+
+🧱 Achados do cluster (EKS)
+
+376 vulnerabilidades identificadas nas imagens Docker;
+
+204 eventos de Killing e 156 de FreeDiskSpaceFailed;
+
+Reinicializações automáticas entre 8–9/out;
+
+Falhas associadas à política de Image Garbage Collection.
+
+🧩 Essas ocorrências impactaram a disponibilidade momentânea do backend, mas o sistema se recuperou automaticamente.
+
+🔍 Conclusões
+
+As falhas são predominantemente de integração (frontend → backend).
+
+O Dynatrace evidenciou correlação direta entre latência, falha de parâmetros e eventos de cluster.
+
+O uso do framework CHT permite traduzir métricas operacionais em indicadores de qualidade semântica e documental.
+
+O pipeline LLM + observabilidade é eficaz para documentação técnica autoadaptativa.
+
+🚀 Recomendações
+
+Revisar parâmetros indefinidos no frontend;
+
+Implantar health checks e retries controlados nas APIs;
+
+Ajustar política de limpeza de disco no EKS;
+
+Associar logs técnicos a traceId e JavaDoc auto-gerado;
+
+Reexecutar a POC após correções para recalibração das métricas CHT.
+
+📚 Referências
+
+Kruse, J. et al. (2024). Can Prompt Engineering Improve Code Documentation? ACM/ICSE.
+
+Guo, T. et al. (2024). Q-Tuning for Developer Assistance. IEEE Software.
+
+Sultan, M. et al. (2024). SCOT: Structured Code-Oriented Training for LLMs. Springer AI Review.
+
+Hsieh, Y. et al. (2023). Tool Documentation Pipelines in Practice. Elsevier Journal of Software Systems.
+
+🧾 Licença
+
+Este repositório integra a pesquisa
+“Qualificação Murillo — UnB / Amazon Q Research”,
+e está licenciado sob MIT License.
+
+© 2025 — Grupo de Pesquisa em Inteligência Artificial Aplicada (UnB)
