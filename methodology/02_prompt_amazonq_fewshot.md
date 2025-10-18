@@ -152,7 +152,7 @@ print(response.output_text)
 🧩 Notas finais
 
 Este arquivo faz parte do repositório público murillo-llm-code-docs, voltado à reprodutibilidade científica da pesquisa
-“Avaliação de LLMs na Documentação Técnica Automatizada de Sistemas Java Legados” (Murillo, 2025).
+“Uma experiência usando Amazon Q (AWS) na indústria em Source Code Summarization” (Murillo, 2025).
 
 📘 Citação sugerida:
 Murillo, M. (2025). Few-Shot Prompt – Amazon Q Developer.
