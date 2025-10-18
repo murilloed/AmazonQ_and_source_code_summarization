@@ -1,133 +1,147 @@
 # 📘 SARSB Documentation Intelligence — Amazon Q Evaluation Framework
 
-### Agência Nacional de Águas e Saneamento Básico (ANA)  
-**Projeto Experimental de Avaliação de Modelos de Linguagem (LLMs) aplicados à Documentação Automatizada em Sistemas Legados**
+### National Water and Basic Sanitation Agency (ANA)  
+**Experimental Research Project on Large Language Models (LLMs) for Automated Documentation in Legacy Systems**
 
 ---
 
-## 🧩 Visão Geral
-Este repositório contém os materiais, scripts e resultados associados ao estudo **“Avaliação do Amazon Q (AWS) para geração automatizada de documentação técnica no sistema SARSB”**, conduzido como parte da pesquisa de pós-graduação em Engenharia de Software aplicada à transformação digital do setor público.
+## 🧩 Overview
+This repository contains materials, scripts, and results related to the study **“Evaluation of Amazon Q (AWS) for Automated Technical Documentation Generation in the SARSB System”**, conducted as part of a graduate research project in **Software Engineering** applied to the digital transformation of the public sector.
 
-O estudo avalia a **eficácia, utilidade e veracidade** de documentações geradas automaticamente por modelos de linguagem de grande escala (LLMs) — com foco no **Amazon Q**, utilizando o sistema **SARSB (Sistema Nacional de Saneamento Básico)** como estudo de caso empírico.
-
----
-
-## 🧠 Objetivo
-Avaliar a viabilidade do uso de **modelos de linguagem generativos (LLMs)** para apoiar a **documentação técnica automatizada de sistemas legados**, garantindo:
-- **Completude estrutural (Completeness)**: aderência ao padrão Javadoc;  
-- **Utilidade prática (Helpfulness)**: clareza e relevância percebidas;  
-- **Veracidade factual (Truthfulness)**: consistência entre documentação e código real.
+The study evaluates the **effectiveness, usefulness, and factual accuracy** of automatically generated documentation produced by **Large Language Models (LLMs)** — focusing on **Amazon Q**, using the **SARSB (National Basic Sanitation System)** as an empirical case study.
 
 ---
 
-## ⚙️ Estrutura Metodológica
+## 🧠 Objective
+To assess the feasibility of using **Generative Language Models (LLMs)** to support **automated technical documentation** for legacy systems, ensuring:
+- **Structural Completeness:** adherence to the Javadoc standard;  
+- **Practical Helpfulness:** clarity and usefulness for developers;  
+- **Factual Truthfulness:** consistency between documentation and actual code.
+
+---
+
+## ⚙️ Methodological Framework
 
 ### **1. Goal–Question–Metric (GQM)**
-Estrutura de rastreabilidade que conecta objetivos, perguntas de pesquisa e métricas mensuráveis:
-- **Goal:** avaliar a eficácia do Amazon Q na documentação automatizada.  
-- **Questions:** o conteúdo gerado é completo, útil e verdadeiro?  
-- **Metrics:** derivadas das dimensões CHT — *Completeness*, *Helpfulness* e *Truthfulness*.
+A traceability structure linking research goals, guiding questions, and measurable metrics:
+- **Goal:** Evaluate the effectiveness of Amazon Q in generating technical documentation.  
+- **Questions:** Is the generated content complete, helpful, and factually correct?  
+- **Metrics:** Derived from the CHT dimensions — *Completeness*, *Helpfulness*, and *Truthfulness*.
 
 ### **2. Evaluation Framework (CHT)**
-Tripé de avaliação proposto para mensurar qualidade documental:
-- **Completeness:** verificação automática via AST + Regex.  
-- **Helpfulness:** avaliação com *LLM-as-a-Judge* (ChatGPT).  
-- **Truthfulness:** checagem contra grafo de dependências do código.
+A three-dimensional evaluation model for assessing documentation quality:
+- **Completeness:** automated verification via AST and regular expressions.  
+- **Helpfulness:** evaluation using *LLM-as-a-Judge* (ChatGPT).  
+- **Truthfulness:** validation against the system’s dependency graph to reduce hallucinations.
 
 ---
 
 ## 🧮 Dataset
 
-- **Sistema Avaliado:** SARSB (Sistema de Acompanhamento de Referência do Saneamento Básico)  
-- **Linguagem:** Java  
-- **Arquivos:** 563  
-- **Linhas de Código:** ~35.000  
-- **Métodos Totais:** 510  
-- **Amostra Experimental:** 219 métodos (amostragem estratificada proporcional)  
-- **Camadas Analisadas:** Config, Exception, Model, Report, Repository, Resource, Service, Util  
+- **System Evaluated:** SARSB (National Basic Sanitation System of Brazil)  
+- **Language:** Java  
+- **Files:** 563  
+- **Lines of Code:** ~35,000  
+- **Total Methods:** 510  
+- **Experimental Sample:** 219 methods (proportional stratified sampling)  
+- **Analyzed Layers:** Config, Exception, Model, Report, Repository, Resource, Service, Util  
 
 ---
 
-## 🧾 Indicadores de Avaliação
+## 🧾 Evaluation Indicators
 
-| Indicador | Descrição | Método de Cálculo |
-|------------|------------|------------------|
-| **C-score** | Completude estrutural | % de seções Javadoc presentes |
-| **H-score** | Utilidade percebida | Média Likert (1–5) por LLM-as-a-Judge |
-| **T-score** | Veracidade factual | Razão de entidades verificadas |
-| **QDI** | Índice de ganho de completude | (Documentação gerada / Documentação original) |
+| Indicator | Description | Calculation Method |
+|------------|-------------|--------------------|
+| **C-score** | Structural Completeness | % of required Javadoc sections present |
+| **H-score** | Perceived Helpfulness | Likert average (1–5) by LLM-as-a-Judge |
+| **T-score** | Factual Truthfulness | Ratio of verified entities in code |
+| **QDI** | Quality Deviation Index | (Generated Documentation / Original Documentation) |
 
 ---
 
-## 🧰 Pipeline Experimental
+## 🧰 Experimental Pipeline
 
-1. **Extração dos métodos** do repositório Java (via scripts PowerShell e Python).  
-2. **Geração automática de documentação** com **Amazon Q (AWS)** — modo *zero-shot* e *few-shot prompting*.  
-3. **Análise CHT**:
+1. **Method Extraction** from the Java repository (via PowerShell and Python scripts).  
+2. **Automated Documentation Generation** using **Amazon Q (AWS)** — *zero-shot* and *few-shot prompting* modes.  
+3. **CHT Evaluation**:
    - *Completeness* → AST + Regex  
    - *Helpfulness* → LLM-as-a-Judge  
    - *Truthfulness* → Dependency Graph Checking  
-4. **Cálculo de métricas (C, H, T, QDI)**.  
-5. **Tratamento estatístico**: correlações, médias e análises inferenciais.  
-6. **Reprodutibilidade**: todos os outputs armazenados e versionados em planilhas estruturadas.
-
-## 🧪 Metodologia de Reprodutibilidade
-
-A pasta **`/methodology/`** contém todos os arquivos necessários para **replicar o experimento completo**, seguindo boas práticas de *Empirical Software Engineering*.  
+4. **Metric Calculation:** C, H, T, and QDI scores.  
+5. **Statistical Analysis:** correlations, averages, and inferential analyses.  
+6. **Reproducibility:** all outputs versioned and stored in structured datasets.
 
 ---
 
-## 📊 Principais Resultados (Resumo)
+## 🧪 Reproducibility Methodology
 
-- **Completude média:** 71%  
-- **Helpfulness média:** 4,0 / 5  
-- **Truthfulness (Existence Ratio):** 0,89  
-- **Comparativo:** desempenho similar ao DocAgent (Meta AI, 2025)
-
-Esses resultados demonstram que o **Amazon Q** é viável como ferramenta de apoio à documentação automatizada, especialmente em sistemas públicos legados de grande escala.
+The **`/methodology/`** folder contains all files required to **replicate the full experiment**, following best practices in *Empirical Software Engineering*.  
 
 ---
 
-## 🧭 Conclusão
-O framework proposto integra **rastreabilidade científica (GQM)**, **avaliação automatizada (CHT)** e **validação híbrida (IA + revisão humana)**.  
-O estudo estabelece um **padrão metodológico reprodutível** para pesquisas sobre documentação técnica gerada por LLMs, contribuindo para a adoção segura e auditável de inteligência artificial na **engenharia de software pública**.
+
+These resources ensure:
+- **Scientific Transparency:** all parameters and scripts are documented.  
+- **Full Traceability:** every run linked to reproducible logs and versioned results.  
+- **Cross-validation:** combined automated and human evaluation for robustness.  
+
+> 💡 Researchers can use this package to reproduce the pipeline on other Java repositories, compare results, or adapt the framework for new software documentation contexts.
 
 ---
 
-## 📚 Referências Principais
+## 📊 Key Results (Summary)
+
+- **Average Completeness:** 71%  
+- **Average Helpfulness:** 4.0 / 5  
+- **Average Truthfulness (Existence Ratio):** 0.89  
+- **Comparison:** similar performance to DocAgent (Meta AI, 2025)
+
+These results demonstrate that **Amazon Q** is a feasible and effective tool for automated documentation, particularly within large-scale public sector systems.
+
+---
+
+## 🧭 Conclusion
+The proposed framework integrates **scientific traceability (GQM)**, **automated evaluation (CHT)**, and **hybrid validation (AI + human review)**.  
+It establishes a **reproducible and auditable methodology** for evaluating LLM-generated documentation, contributing to the **safe adoption of AI in public software engineering**.
+
+---
+
+## 📚 Key References
 - Basili, V.R., Caldiera, G., & Rombach, H.D. (1994). *Goal Question Metric Approach*.  
 - Yang, D. et al. (2025). *DocAgent: A Multi-Agent System for Automated Code Documentation Generation*. Meta AI.  
 - Gu, J. et al. (2024). *Survey on LLMs for Software Engineering*. IEEE Software.  
-- Esquivel, A. et al. (2023). *Detecção Automatizada de Estruturas de Código via AST*.  
-- Treccani, M. et al. (2010). *Utilização de Métodos Empíricos em Engenharia de Software*.
+- Esquivel, A. et al. (2023). *Automatic Detection of Code Structures via AST*.  
+- Treccani, M. et al. (2010). *Empirical Methods in Software Engineering*.  
 
 ---
 
-## 🧩 Estrutura do Repositório
+## 🧩 Repository Structure
 
-├── /src/ # Scripts de coleta e análise (PowerShell, Python)
-├── /methodology/ # Metodologia de reprodutibilidade (documentos e notebooks)
-├── /outputs/ # Resultados (planilhas e logs)
-├── /docs/ # Relatórios e figuras metodológicas
-├── /references/ # Arquivos BibTeX e PDFs científicos
-├── README.md # Este arquivo
-└── LICENSE # Licença pública institucional (ANA)
+├── /src/ # Data collection and analysis scripts (PowerShell, Python)
+├── /methodology/ # Reproducibility methodology (docs and notebooks)
+├── /outputs/ # Results (spreadsheets, logs)
+├── /docs/ # Reports and methodological figures
+├── /references/ # BibTeX files and reference papers
+├── README.md # This file
+└── LICENSE # Institutional license (ANA)
 
-
----
-
-## 🏛️ Licença e Uso Institucional
-Este repositório faz parte de um projeto de pesquisa vinculado à **Agência Nacional de Águas e Saneamento Básico (ANA)**.  
-Os dados do sistema SARSB são de uso restrito e utilizados exclusivamente para fins acadêmicos e de pesquisa científica.  
-O código auxiliar (scripts e pipelines) é disponibilizado sob **licença MIT**.
 
 ---
 
-## 📬 Contato
-**Autor:** Murillo Carvalho 
-**Instituição:** Universidade de Brasília (UnB)  
-**Orientador:** Prof. [Rodrigo Bonifácio de Almeida]  
+## 🏛️ License and Institutional Use
+This repository is part of a research project linked to the **National Water and Basic Sanitation Agency (ANA)**.  
+SARSB system data are restricted and used exclusively for academic and scientific purposes.  
+Auxiliary code (scripts and pipelines) is released under the **MIT License**.
+
+---
+
+## 📬 Contact
+**Author:** Murillo Carvalho  
+**Institution:** University of Brasília (UnB)  
+**Advisor:** Prof. Rodrigo Bonifácio de Almeida  
 **E-mail:** murillo.ed1402@gmail.com  
-**Ano:** 2025  
+**Year:** 2025  
 
 ---
+
+
