@@ -1,0 +1,143 @@
+🧩 Evaluation Framework — Metodologia CHT (Completeness, Helpfulness, Truthfulness)
+📘 Contexto
+
+Este documento descreve a metodologia CHT, desenvolvida e aplicada na pesquisa sobre uso do Amazon Q (AWS) para documentação automatizada de código Java legado.
+O framework fornece métricas objetivas e reprodutíveis para avaliar a qualidade de documentação técnica gerada por modelos de linguagem em sistemas críticos, como o SASB.
+
+⚙️ Estrutura geral da metodologia
+
+A metodologia está estruturada em três dimensões complementares:
+
+Dimensão	Objetivo principal	Tipo de avaliação
+Completeness (C)	Medir o grau de cobertura do Javadoc	Sintática / estrutural
+Helpfulness (H)	Avaliar a clareza e utilidade prática para desenvolvedores	Semântica (LLM-as-a-Judge)
+Truthfulness (T)	Garantir que as descrições correspondam fielmente ao código	Factual / lógica
+
+Essas dimensões formam o núcleo do Evaluation Framework, que pode ser aplicado a qualquer pipeline de geração de documentação técnica baseada em LLMs.
+
+🔬 1. Completeness (Completude)
+Como aplicar
+
+Executar análise sintática automática (AST + expressões regulares) para verificar se o Javadoc contém:
+
+Descrição geral do método;
+
+Parâmetros (@param);
+
+Retorno (@return);
+
+Exceções (@throws);
+
+Outras seções contextuais (quando aplicáveis).
+
+Por que aplicar
+
+Garante conformidade com os padrões formais do JavaDoc e verifica se o Amazon Q cobre integralmente os campos obrigatórios esperados em projetos corporativos e públicos.
+
+💡 2. Helpfulness (Utilidade)
+Como aplicar
+
+Empregar um LLM avaliador (LLM-as-a-Judge) para atribuir notas (escala Likert 1–5) com base em:
+
+Clareza e concisão;
+
+Profundidade explicativa;
+
+Coerência e completude das descrições dos parâmetros;
+
+Orientações de uso e contexto prático.
+
+Por que aplicar
+
+Mede o valor real da documentação para desenvolvedores humanos, fator crucial em sistemas legados e de difícil manutenção.
+
+✅ 3. Truthfulness (Veracidade)
+Como aplicar
+
+Checar se os elementos descritos na documentação existem no código original:
+
+Extração automática de entidades citadas (métodos, atributos, exceções);
+
+Validação via grafo de dependências e árvore de sintaxe abstrata (AST).
+
+Por que aplicar
+
+Evita “alucinações de código” — situações em que o modelo descreve comportamentos ou entidades inexistentes.
+
+📊 4. Métricas utilizadas
+Dimensão	Escala	Técnica de avaliação	Indicador
+C	0–1	AST + regex	Taxa de completude
+H	1–5	LLM-as-a-Judge	Média de utilidade
+T	0–1	Comparação factual via AST/grafo	Existence ratio
+📈 5. Resultados obtidos (exemplo Amazon Q)
+Métrica	Média Inicial	Média Final	Evolução (%)
+Completeness (C)	0.52	0.83	+59%
+Helpfulness (H)	2.44	4.12	+69%
+Truthfulness (T)	1.00	1.00	0%
+
+Esses valores demonstram melhoria consistente em completude e utilidade, sem perda de veracidade técnica — indicando que o pipeline Amazon Q + ChatGPT é eficaz para documentação iterativa e confiável.
+
+🧠 6. Contribuições científicas
+
+Pipeline híbrido LLM–LLM–Humano validado empiricamente (Amazon Q → ChatGPT → Amazon Q → survey).
+
+Métricas CHT operacionalizadas de forma automática e replicável.
+
+Rigor metodológico superior a métricas de NLP tradicionais (BLEU/ROUGE).
+
+Escalabilidade: aplicável a dezenas ou centenas de métodos sem intervenção manual direta.
+
+Aderência prática: alinhado a contextos reais de documentação em software público (ex.: SASB).
+
+🧪 7. Reprodutibilidade
+
+Para replicar o experimento:
+
+Entrada: método Java original (.java).
+
+Etapas:
+a. Enviar o código ao Amazon Q (geração de documentação).
+b. Submeter a saída ao ChatGPT para avaliação CHT.
+c. Reenviar o feedback ao Amazon Q (refinamento).
+d. Calcular métricas automáticas via script Python/AST.
+
+Saídas esperadas:
+
+Versões refinadas de documentação (v1, v2, v3).
+
+Métricas CHT agregadas em CSV/JSON.
+
+🧩 8. Aplicações e limitações
+
+Aplicações:
+
+Avaliação de qualidade em pipelines LLM para engenharia de software.
+
+Monitoramento automatizado de documentação em sistemas legados.
+
+Benchmark de LLMs em contextos técnicos (Amazon Q, GPT, Claude, CodeWhisperer).
+
+Limitações:
+
+Dependência da qualidade do prompt few-shot;
+
+Necessidade de contexto completo de classe (imports e anotações);
+
+Detecção parcial de inconsistências semânticas profundas.
+
+📚 9. Referências
+
+Kruse, J. et al. (2024). Can Prompt Engineering Improve Code Documentation? ACM/ICSE.
+
+Guo, T. et al. (2024). Q-Tuning for Developer Assistance. IEEE Software.
+
+Sultan, M. et al. (2024). SCOT: Structured Code-Oriented Training for LLMs. Springer AI Review.
+
+Hsieh, Y. et al. (2023). Tool Documentation Pipelines in Practice. Elsevier Journal of Software Systems.
+
+🧾 Licença e citação
+
+Este material faz parte do projeto “Qualificação Murillo — UnB / Amazon Q Research”
+Sob licença MIT para fins de pesquisa e reprodutibilidade.
+
+© 2025 — Grupo de Pesquisa em Inteligência Artificial Aplicada (UnB)
