@@ -30,8 +30,6 @@ A metodologia combina **Amazon Q (geração)** e **ChatGPT (avaliação e refina
 
 ## ⚙️ Arquitetura Experimental
 
-```mermaid
-graph TD
 A[Código Original] --> B[Amazon Q - Few Shot Prompting]
 B --> C[Documentação Inicial (Javadoc)]
 C --> D[ChatGPT - LLM-as-a-Judge]
@@ -40,9 +38,9 @@ E --> F[Amazon Q - Refinamento Iterativo]
 F --> G[Versão Final da Documentação]
 G --> H[Evaluation Framework - Métricas Agregadas]
 H --> I[Survey de Desenvolvedores]
+
 📁 Estrutura do Repositório
-css
-Copiar código
+
 murillo-llm-code-docs/
 │
 ├── README.md                ← Documento principal
@@ -74,6 +72,7 @@ murillo-llm-code-docs/
 └── notebooks/
     └── pipeline_demonstration.ipynb
 🚀 Pipeline de Execução
+
 1️⃣ Preparar ambiente
 Requer:
 
@@ -85,12 +84,10 @@ Acesso ao Amazon Q Developer
 
 Dependências:
 
-bash
-Copiar código
+
 pip install openai matplotlib pandas python-docx
 2️⃣ Executar etapas principais
-bash
-Copiar código
+
 # 1. Geração inicial (Few-Shot)
 python scripts/generate_ast.py
 
@@ -133,8 +130,7 @@ Projeto de Qualificação — Programa de Pós-Graduação em Computação Aplic
 🧩 Citação e Licença
 Cite este repositório como:
 
-bash
-Copiar código
+
 @software{murillo2025_llm_docs,
   author = {Murillo, M.},
   title  = {Avaliação de LLMs na Documentação Automatizada de Código Java},
@@ -148,4 +144,4 @@ Copiar código
 🤝 Contato
 Autor: Murillo Carvalho
 E-mail: murillo.ed1402@gmail.com
-LinkedIn: linkedin.com/in/murillo-carvalho
+
