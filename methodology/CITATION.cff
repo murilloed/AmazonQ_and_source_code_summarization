@@ -2,14 +2,14 @@
 # Este arquivo permite que o repositório seja citado formalmente em publicações acadêmicas.
 
 cff-version: 1.2.0
-title: "Avaliação de LLMs na Documentação Automatizada de Código Java"
+title: "Uma experiência usando Amazon Q (AWS) na indústria em Source Code Summarization"
 message: "Se você utilizar este repositório em sua pesquisa, por favor cite-o conforme os metadados abaixo."
 type: software
 authors:
   - family-names: "Carvalho"
     given-names: "Murillo"
     email: "murillo.ed1402@gmail.com"
-    affiliation: "Programa de Pós-Graduação em Computação Aplicada – Universidade Federal XYZ"
+    affiliation: "Programa de Pós-Graduação em Computação Aplicada – Universidade de Brasília - UnB"
 identifiers:
   - type: doi
     value: "10.5281/zenodo.placeholder"
@@ -36,10 +36,10 @@ contact:
     email: "murillo.ed1402@gmail.com"
 preferred-citation:
   type: article
-  title: "Avaliação de LLMs na Documentação Técnica Automatizada de Sistemas Java Legados"
+  title: "Uma experiência usando Amazon Q (AWS) na indústria em Source Code Summarization"
   authors:
     - family-names: "Carvalho"
       given-names: "Murillo"
-  journal: "Projeto de Qualificação – PPG Computação Aplicada, Universidade Federal XYZ"
+  journal: "Projeto de Qualificação – PPG Computação Aplicada, Universidade de Brasília - UnB"
   year: 2025
   doi: "10.5281/zenodo.placeholder"
