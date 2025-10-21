@@ -209,8 +209,8 @@ public class AWSConfig {
 
     public AWSCredentials credentials() {
         AWSCredentials credentials = new BasicAWSCredentials(
-           "AKIAQPH35UIKVCAULOMS",
-            "6hAm2qtxqLi+AhXqkiGNwiJ/rEJ999kZKSp+zoOy"
+           "private",
+            "private"
         );
         return credentials;
     }
@@ -35312,4 +35312,5 @@ public class StartupUtil {
 // Fim do arquivo: StartupUtil.java
 
 ============================================================
+
 
