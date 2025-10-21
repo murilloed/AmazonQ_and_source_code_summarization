@@ -125,8 +125,8 @@ PACOTE 2 - [Config] br.gov.ana.sarsb.config.AWSConfig
  */
 public AWSCredentials credentials() {
     AWSCredentials credentials = new BasicAWSCredentials(
-       "AKIAQPH35UIKVCAULOMS",
-        "6hAm2qtxqLi+AhXqkiGNwiJ/rEJ999kZKSp+zoOy"
+       "PRIVATE",
+        "PRIVATE"
     );
     return credentials;
 }
